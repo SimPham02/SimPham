@@ -9,11 +9,12 @@
 </head>
 <body>
     <div class="container">
+        <audio loop id="bgMusic" src="assets/mp3/bg.mp3" type="audio/mp3"></audio>
         <div class="particles-container"></div>
-        <audio autoplay loop>
-            <source src="assets/mp3/bg.mp3" type="audio/mp3">
-        </audio>
-        <div class="profile-header" data-tilt>
+        <div class="landing-page" id="landingPage">
+            <button class="click-me-btn scale-animation">Click Me!</button>
+        </div>
+        <div class="profile-header hidden scale-animation" data-tilt id="profileHeader">
             <img src="assets/images/avtsim.jpg" alt="Profile Picture" class="profile-img">
             <h1 class="name">Sim Pham</h1>
 

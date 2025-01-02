@@ -41,3 +41,14 @@ document.addEventListener('DOMContentLoaded', function() {
     document.title = text.charAt(0);
     typeWriter();
 });
+
+document.querySelector('.click-me-btn').addEventListener('click', () => {
+    document.getElementById('landingPage').style.display = 'none';
+    document.getElementById('profileHeader').classList.remove('hidden');
+    const audio = document.getElementById('bgMusic');
+    audio.play();
+});
+
+document.querySelector('.profile-header').addEventListener('animationend', function(e) {
+    this.classList.remove('scale-animation');
+});
