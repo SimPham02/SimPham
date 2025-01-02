@@ -52,3 +52,4 @@ document.querySelector('.click-me-btn').addEventListener('click', () => {
 document.querySelector('.profile-header').addEventListener('animationend', function(e) {
     this.classList.remove('scale-animation');
 });
+

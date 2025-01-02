@@ -217,7 +217,7 @@ body::before {
 
 .divider {
     width: 85%;
-    margin: 0 auto 30px auto;
+    margin: 0 auto 15px auto;
     border: none;
     height: 2px;
     background: linear-gradient(
@@ -228,3 +228,14 @@ body::before {
         transparent
     );
 }
+
+/* Style cho phần quote */
+.quote-container {
+    margin: 0 auto 10px auto;
+    font-style: italic;
+    color: #4b5334;
+    position: relative;
+    padding: 10px 20px;
+    font-size: 17px;
+}
+
