@@ -392,6 +392,51 @@ body {
         transition: transform 150ms ease;
         animation-play-state: paused; /* tạm dừng float khi nhấn */
     }
+
+    /* Fix social-link trên mobile: không bị méo khi chạm/hover, giữ hình vuông */
+    .social-links {
+        gap: 12px;
+    }
+
+    .social-link {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        min-height: 48px;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        padding: 0;
+        transform: none !important;       /* override desktop hover transform */
+        will-change: transform;
+        backface-visibility: hidden;
+        -webkit-tap-highlight-color: transparent;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Không scale trên hover (touch devices) — chỉ nhẹ dịch Y khi active/touch */
+    .social-link:hover,
+    .social-link:focus {
+        transform: none !important;
+        box-shadow: none;
+    }
+
+    .social-link:active,
+    .social-link.touch-pressed {
+        transform: translateY(-4px) scale(1.03);
+        transition: transform 120ms ease;
+    }
+
+    .social-link svg {
+        width: 20px;
+        height: 20px;
+        display: block; /* tránh baseline stretching */
+    }
+
+    .social-link::before {
+        opacity: 0.06; /* giữ hiệu ứng nhẹ nhàng trên mobile */
+    }
 }
 
 /* keyframes nhẹ lên xuống */
