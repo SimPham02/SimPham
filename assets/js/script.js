@@ -51,3 +51,44 @@ enterBtn.addEventListener('click', () => {
     // Try to play music (might be blocked by browser)
     bgMusic.play().catch(e => console.log('Audio playback failed:', e));
 });
+
+// Nếu file này đã có logic khác, thay phần init VanillaTilt bằng đoạn sau
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('[data-tilt]');
+    const mobileBreakpoint = 768;
+
+    function initTilt() {
+        if (typeof VanillaTilt === 'undefined') return;
+        cards.forEach(el => {
+            if (window.innerWidth > mobileBreakpoint) {
+                if (!el.vanillaTilt) {
+                    VanillaTilt.init(el, {
+                        max: 15,
+                        speed: 400,
+                        glare: true,
+                        "max-glare": 0.2
+                    });
+                }
+            } else {
+                if (el.vanillaTilt && typeof el.vanillaTilt.destroy === 'function') {
+                    el.vanillaTilt.destroy();
+                }
+            }
+        });
+    }
+
+    // init once and on resize (debounced)
+    initTilt();
+    let rTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(rTimer);
+        rTimer = setTimeout(initTilt, 200);
+    });
+
+    // touch feedback: thêm/xóa class để tạm dừng float animation trên mobile
+    cards.forEach(card => {
+        card.addEventListener('touchstart', () => card.classList.add('touch-pressed'), {passive: true});
+        card.addEventListener('touchend', () => card.classList.remove('touch-pressed'), {passive: true});
+        card.addEventListener('touchcancel', () => card.classList.remove('touch-pressed'), {passive: true});
+    });
+});

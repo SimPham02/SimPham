@@ -376,15 +376,27 @@ body {
 /* Responsive */
 @media (max-width: 768px) {
     .profile-card {
-        padding: 40px 30px;
+        /* bỏ shadow transform nặng nếu có từ tilt */
+        transform: none !important;
+        will-change: transform;
+        animation: mobileFloat 4s ease-in-out infinite;
+        /* giữ responsive padding/width nếu cần */
+        margin: 1.2rem auto;
+        max-width: 92%;
     }
 
-    .name {
-        font-size: 2rem;
+    /* nhẹ khi chạm: phóng to chút khi active/touch */
+    .profile-card:active,
+    .profile-card.touch-pressed {
+        transform: translateY(-6px) scale(1.01);
+        transition: transform 150ms ease;
+        animation-play-state: paused; /* tạm dừng float khi nhấn */
     }
+}
 
-    .profile-img-container {
-        width: 150px;
-        height: 150px;
-    }
+/* keyframes nhẹ lên xuống */
+@keyframes mobileFloat {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
 }
