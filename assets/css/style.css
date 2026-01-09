@@ -884,22 +884,32 @@ body {
 }
 
 @media (max-width: 1100px) {
+    .container {
+        padding: 80px 15px;
+        align-items: flex-start; /* Cho phép nội dung dài cuộn dọc tốt hơn */
+    }
+
     .cards-grid {
         grid-template-columns: 1fr;
         grid-template-areas: 
             "profile"
             "stats"
-            "skills";
+            "audio";
         gap: 30px;
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        transform: none !important;
     }
 
-    #profileCard {
-        transform: scale(1);
-    }
-
-    #statsCard, #skillsCard {
-        transform: none;
+    #profileCard, #statsCard, #musicCard {
+        transform: none !important;
         filter: brightness(1);
+        width: 100%;
+    }
+
+    #musicCard {
+        grid-area: audio;
     }
 }
 
@@ -914,23 +924,46 @@ body {
     }
 
     .hud-corners {
-        top: 10px;
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
+        top: 5px;
+        left: 5px;
+        right: 5px;
+        bottom: 5px;
+    }
+
+    .corner {
+        width: 20px;
+        height: 20px;
     }
 }
 
 @media (max-width: 480px) {
     .profile-card {
-        padding: 40px 25px;
-        max-width: 90%;
+        padding: 30px 15px;
+        width: 100%;
+        max-width: 100%;
     }
     
     .name {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
     }
-}
+
+    .profile-img-container {
+        width: 120px;
+        height: 120px;
+    }
+
+    .badges {
+        gap: 5px;
+    }
+
+    .badge {
+        padding: 4px 10px;
+        font-size: 0.7rem;
+    }
+
     .social-links {
         gap: 12px;
     }
@@ -974,6 +1007,7 @@ body {
     .social-link::before {
         opacity: 0.06; /* giữ hiệu ứng nhẹ nhàng trên mobile */
     }
+}
 
 /* keyframes nhẹ lên xuống */
 @keyframes mobileFloat {
