@@ -14,12 +14,12 @@
     
     // Start everything on Enter click
     enterBtn.addEventListener('click', () => {
-        // Start Music immediately to bypass block
+        // Prime audio - "Mở khóa" âm thanh bằng cách phát rồi tạm dừng ngay lập tức
+        // Điều này đảm bảo trình duyệt cho phép phát nhạc tự động sau khi load xong
         audio.play().then(() => {
-            isMusicPlaying = true;
-            visualizer.classList.add('active');
-            updatePlayIcon(true);
-        }).catch(e => console.error("Initial play failed:", e));
+            audio.pause();
+            audio.currentTime = 0;
+        }).catch(e => console.log("Audio primer:", e));
 
         // Fade Gate
         gate.classList.add('fade-out');
@@ -47,6 +47,18 @@
             loader.style.display = 'none';
             container.classList.remove('hidden');
             musicPlayer.classList.add('show');
+
+            // Phát nhạc sau khi giao diện chính đã hiển thị
+            audio.play().then(() => {
+                isMusicPlaying = true;
+                visualizer.classList.add('active');
+                updatePlayIcon(true);
+            }).catch(e => {
+                console.error("Phát nhạc thất bại sau khi load:", e);
+                isMusicPlaying = false;
+                visualizer.classList.remove('active');
+                updatePlayIcon(false);
+            });
         }, 1000);
     }
 
